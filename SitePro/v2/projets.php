@@ -1,11 +1,6 @@
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>CV Julien FREMAUX</title>
-        <link rel="stylesheet" href="test.css">
-    </head>
-
-    <body>
+<?php
+require_once('template_header.php');
+?>
         <h1>Bienvenue sur la liste de mes projets !</h1><br>
         <dl>
             <li>Site Web
@@ -33,12 +28,8 @@
                 </article>
             </li>
         </dl>
-
-        <nav id="menu_dynamique">
-            <ul id="menu-navigation-principale" class="menu">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="cv.html">Mon CV</a></li>
-            </ul>
-        </nav>
-    </body>
-</html>
+<?php
+require_once('template_menu.php');
+renderMenuToHTML('projets');
+require_once('template_footer.php');
+?>
