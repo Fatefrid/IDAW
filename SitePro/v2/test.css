@@ -16,9 +16,9 @@ html{
       width:200px;
       list-style:none;
       padding:0px;
-      /*display: flexbox;
+      display: flexbox;
       margin-left: 45%;
-      margin-top: 10%;*/
+      margin-top: 10%;
   }
   
   #menu_dynamique ul li {
@@ -49,9 +49,9 @@ html{
   }
 
   .img-circle{
+    display: flexbox;
+    align-items: center;
+    justify-content: center;
     clip-path:ellipse(50% 50%);
 }
-  #selected{
-    background: #3b6f67;
-  }
   
