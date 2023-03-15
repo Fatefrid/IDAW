@@ -1,28 +1,19 @@
-<h1>Bienvenue sur la liste de mes projets !</h1><br>
-<dl>
-    <li>Site Web
-        <article>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-        </article>
-    </li>
-    <li>Jeu video VR
-        <article>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-        </article>
-    </li>
-    <li>Aplication web
-        <article>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-        </article>
-    </li>
-    <li>Logiciel de supervision
-        <article>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-        </article>
-    </li>
-</dl>
-<a href="index.php?page=projets&lang=en">Anglais</a>
+<!-- Award & Achievements -->
+<div class="award section second" id="achievements">
+	<div class="container">
+		<h1>Mes<br>Projets</h1>
+		<ul class="award-list list-flat">
+			<li>2022</li>
+			<li>Projet management</li>
+		</ul>
+		<ul class="award-list list-flat">
+			<li>2021</li>
+			<li>Projet ouvert</li>
+			<li>Réalisation d'une application Android</li>
+		</ul>
+		<ul class="award-list list-flat">
+			<li>2020</li>
+			<li>Création d'un Escape Game en VR</li>
+		</ul>
+	</div>
+</div>

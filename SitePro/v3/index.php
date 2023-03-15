@@ -9,12 +9,11 @@
     if(isset($_GET['lang'])) {
         $lang = $_GET['lang'];
     }
+
 ?>
-<header class="bandeau_haut">
-    <h1 class="titre">Julien FREMAUX</h1>
-</header>
+
 <?php
-    renderMenuToHTML($currentPageId);
+    renderMenuToHTML($currentPageId, $lang);
 ?>
 <section class="corps">
     <?php

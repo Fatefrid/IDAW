@@ -1,4 +1,41 @@
-<h1>Bienvenue sur mon CV !</h1><br>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at feugiat quam. Vivamus ultricies tortor in lorem dictum, nec malesuada elit varius. Nunc vitae semper libero, in elementum diam. Fusce ac neque vitae leo finibus cursus. Morbi eget aliquet sapien. Morbi ante velit, convallis a nisi in, luctus aliquet massa. Mauris gravida bibendum diam, et ultricies tortor imperdiet vel. Cras eu ullamcorper turpis. Integer semper non quam eget tempor. Cras egestas dignissim ipsum non sollicitudin. Nulla consequat dui sit amet laoreet dignissim. Mauris vehicula ac ante pretium laoreet. Proin vitae velit finibus magna hendrerit ullamcorper et a risus. Ut vestibulum libero at elit rhoncus sollicitudin.</p>
-<a href="index.php?page=cv&lang=en">Anglais</a>
-    
+<!-- Work Experience -->
+<div class="work section second" id="experiences">
+	<div class="container">
+		<h1>Experiences<br>Professionnelles</h1>
+		<ul class="work-list">
+			<li>mai 2022 - juillet 2022</li>
+			<li><a href="#">Plastic Omnium</a></li>
+			<li>Service IT</li>
+		</ul>
+		<ul class="work-list">
+			<li>avril 2021 - juin 2021</li>
+			<li><a href="#">Hyperion</a></li>
+			<li>Bureau d'étude maintenance prédictive</li>
+		</ul>
+		<ul class="work-list">
+			<li>novembre 2020 - mars 2021</li>
+			<li><a href="#">IUT de Béthune</a></li>
+			<li>Tutorat</li>
+		</ul>
+	</div>
+</div>
+
+<!-- Technical Skills -->
+<div class="skills section second" id="skills">
+	<div class="container">
+		<h1>Compétences<br>Techniques</h1>
+		<ul class="skill-list list-flat">
+			<li>Technologies Web</li>
+			<li>HTML / CSS / PHP / Javascript</li>
+		</ul>
+		<ul class="skill-list list-flat">
+			<li>Base de données</li>
+			<li>MySQL / Access</li>
+		</ul>
+		<ul class="skill-list list-flat">
+			<li>Virtualisation</li>
+			<li>VMWare / VirtualBox</li>
+		</ul>
+	</div>
+</div>
+

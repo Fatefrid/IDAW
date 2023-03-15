@@ -1,28 +1,19 @@
-<h1>Welcome to the list of ly projects !</h1><br>
-<dl>
-    <li>Web Site
-        <article>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-        </article>
-    </li>
-    <li>VR video game
-        <article>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-        </article>
-    </li>
-    <li>Web application
-        <article>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-        </article>
-    </li>
-    <li>Supervision software
-        <article>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-            <section>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</section>
-        </article>
-    </li>
-</dl>
-<a href="index.php?page=projets&lang=fr">French</a>
+<!-- Award & Achievements -->
+<div class="award section second" id="achievements">
+	<div class="container">
+		<h1>My<br>Projects</h1>
+		<ul class="award-list list-flat">
+			<li>2022</li>
+			<li>Management project</li>
+		</ul>
+		<ul class="award-list list-flat">
+			<li>2021</li>
+			<li>Open project</li>
+			<li>Development of an Android application</li>
+		</ul>
+		<ul class="award-list list-flat">
+			<li>2020</li>
+			<li>Creation of a VR Escape Game</li>
+		</ul>
+	</div>
+</div>
