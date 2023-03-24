@@ -59,31 +59,104 @@
         </form>
         <script>
             let studentId = 0;
-            let student = [];
+            let student = [
+                    {
+                        nom : "FREMAUX",
+                        prenom : "Julien",
+                        date : "2001-08-17",
+                        like : "Oui",
+                        remarques : ""
+                    }
+                ];
+            initStudent();
+
             function onFormSubmit() {
             // prevent the form to be sent to the server
                 event.preventDefault();
-                let nom = $("#inputNom").val();
-                let prenom = $("#inputPrenom").val();
-                let date = $("#inputDate").val();
-                let like = $("#inputLike").prop("checked") ? "Oui" : "Non";
-                let remarques = $("#inputRemarques").val();
-                $("#studentsTableBody").append(`<tr id="${studentId}"><td>${nom}</td><td>${prenom}</td><td>${date}</td><td>${like}</td><td>${remarques}</td><td>
-                    <button onclick="onModifierClick()" class="btn btn-primary form-control">Modifier</button>
-                    <button onclick="onSupprimerClick(${studentId})" class="btn btn-primary form-control">Supprimer</button>
-                    </td><td>${studentId}</td></tr>`);
-                studentId++;
-                document.getElementById("addStudentForm").reset();
+                addStudent();
+                resetForm();
             }
 
             function onSupprimerClick(id) {
                 event.preventDefault();
                 $("#"+ id).remove();
+                student.splice(id, 1);
             }
 
-            function onModifierClick() {
-                event.preventDefault();
+            function resetForm() {
+                document.getElementById("addStudentForm").reset();
+            }
+
+            function addStudent() {
+
+                let nom = $("#inputNom").val();
+                let prenom = $("#inputPrenom").val();
+                let date = $("#inputDate").val();
+                let like = $("#inputLike").prop("checked") ? "Oui" : "Non";
+                let remarques = $("#inputRemarques").val();
+                student.push({
+                    "nom": nom,
+                    "prenom": prenom,
+                    "date": date,
+                    "like": like,
+                    "remarques": remarques
+                });
+                $("#studentsTableBody").append(`<tr id="${studentId}"><td>${nom}</td><td>${prenom}</td><td>${date}</td><td>${like}</td><td>${remarques}</td><td>
+                    <button onclick="onModifierClick(${studentId})" class="btn btn-primary form-control">Modifier</button>
+                    <button onclick="onSupprimerClick(${studentId})" class="btn btn-primary form-control">Supprimer</button>
+                    </td></tr>`);
+                studentId++;
+            }
+
+            function initStudent() {
+                $("#studentsTableBody").append(`<tr id="${studentId}"><td>${student[0].nom}</td><td>${student[0].prenom}</td><td>${student[0].date}</td><td>${student[0].like}</td><td>${student[0].remarques}</td><td>
+                    <button onclick="onModifierClick(${studentId})" class="btn btn-primary form-control">Modifier</button>
+                    <button onclick="onSupprimerClick(${studentId})" class="btn btn-primary form-control">Supprimer</button>
+                    </td></tr>`);
+                studentId ++;
+            }
+
+            function onModifierClick(id) {
+                // Get the current row's values
+                let currentRow = $("#" + id);
+                let nom = currentRow.find("td:eq(0)").text();
+                let prenom = currentRow.find("td:eq(1)").text();
+                let date = currentRow.find("td:eq(2)").text();
+                let like = currentRow.find("td:eq(3)").text() === "Oui";
+                let remarques = currentRow.find("td:eq(4)").text();
+
+                console.log(nom);
+
+                // Set the values in the form
+                $("#inputNom").val(nom);
+                $("#inputPrenom").val(prenom);
+                $("#inputDate").val(date);
+                $("#inputLike").prop("checked", like);
+                $("#inputRemarques").val(remarques);
+
+                // Replace the "Submit" button with a "Modifier" button
+                $("#addStudentForm button[type='submit']").replaceWith(`<button type="submit" onclick="onUpdateClick(${id});" class="btn btn-primary form-control">Modifier</button>`);
+            }
+
+            function onUpdateClick(id) {
+                // Update the row's values
+                let nom = $("#inputNom").val();
+                let prenom = $("#inputPrenom").val();
+                let date = $("#inputDate").val();
+                let like = $("#inputLike").prop("checked") ? "Oui" : "Non";
+                let remarques = $("#inputRemarques").val();
+
+                $("#" + id).html(`<td>${nom}</td><td>${prenom}</td><td>${date}</td><td>${like}</td><td>${remarques}</td><td><button onclick="onModifierClick(${id}); return false;">Modifier</button><button onclick="onSupprimerClick(${id}); return false;">Supprimer</button></td>`);
                 
+                student.splice(id, 1, {
+                    "nom": nom,
+                    "prenom": prenom,
+                    "date": date,
+                    "like": like,
+                    "remarques": remarques});
+                // Replace the "Modifier" button with the "Submit" button
+                $("#addStudentForm button[type='button']").replaceWith(`<button type="submit" class="btn btn-primary form-control">Ajouter</button>`);
+                resetForm();
             }
         </script>
     </body>
