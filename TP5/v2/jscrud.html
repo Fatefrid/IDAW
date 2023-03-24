@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="style.css"/>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <title>tabletest</title>
+    </head>
+    <body>
+        <div id="res"></div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">CRUD</th>
+                </tr>
+            </thead>
+            <tbody id="studentsTableBody">
+            </tbody>
+        </table>
+        <form id="addStudentForm" action="" onsubmit="onFormSubmit();">
+            <div class="form-group row">
+                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="inputName" >
+                </div>
+
+                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="inputEmail" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <span class="col-sm-2"></span>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary form-control">Ajouter</button>
+                </div>
+            </div>
+        </form>
+        <script>
+
+            $(document).ready(function(){
+                getAllUsers();
+            });
+
+            function getAllUsers() {
+                $.ajax({
+                    url: "http://localhost/IDAW/TP4/Ex5/users.php",
+                    method: "GET",
+                    datatype: "json",
+                })
+                .done(function(response){
+                    data = JSON.stringify(response);
+                    displayHTMLTable();
+                })
+                .fail(function(error){
+                    alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+                })
+            }
+
+            function onFormSubmit() {
+                event.preventDefault();
+                var jsonData = {
+                    "name" : $("#inputName").val(),
+                    "email" : $("#inputEmail").val()
+                }
+                $.ajax({
+                    url: "http://localhost/IDAW/TP4/Ex5/users.php",
+                    method: "POST",
+                    datatype: "json",
+                    data: JSON.stringify(jsonData),
+                    contentType: "application/json; charset=utf-8",
+                })
+                .done(function(response){
+                    data = JSON.stringify(response);
+                })
+                .fail(function(error){
+                    alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+                })
+                resetForm();
+                getAllUsers();
+            }
+
+            function resetForm() {
+                document.getElementById("addStudentForm").reset();
+            }
+
+            function displayHTMLTable() {
+                    var users = JSON.parse(data);
+                    console.log(users);
+                    $("#studentsTableBody").empty();
+                    for(var i=0; i<users.length; i++){
+                        $("#studentsTableBody").append(`<tr id=""><td>${users[i].id}</td><td>${users[i].name}</td><td>${users[i].email}</td><td>`);
+                    }
+            }
+
+            /*
+            function onSupprimerClick(id) {
+                $("#"+ id).remove();
+                student.splice(id, 1);
+            }
+
+            function onModifierClick(id) {
+                // Get the current row's values
+                let currentRow = $("#" + id);
+                let nom = currentRow.find("td:eq(0)").text();
+                let prenom = currentRow.find("td:eq(1)").text();
+                let date = currentRow.find("td:eq(2)").text();
+                let like = currentRow.find("td:eq(3)").text() === "Oui";
+                let remarques = currentRow.find("td:eq(4)").text();
+
+                console.log(nom);
+
+                // Set the values in the form
+                $("#inputNom").val(nom);
+                $("#inputPrenom").val(prenom);
+                $("#inputDate").val(date);
+                $("#inputLike").prop("checked", like);
+                $("#inputRemarques").val(remarques);
+
+                // Replace the "Submit" button with a "Modifier" button
+                $("#addStudentForm button[type='submit']").replaceWith(`<button type="submit" onclick="onUpdateClick(${id});" class="btn btn-primary form-control">Modifier</button>`);
+            }
+
+            function onUpdateClick(id) {
+                // Update the row's values
+                let nom = $("#inputNom").val();
+                let prenom = $("#inputPrenom").val();
+                let date = $("#inputDate").val();
+                let like = $("#inputLike").prop("checked") ? "Oui" : "Non";
+                let remarques = $("#inputRemarques").val();
+
+                $("#" + id).html(`<td>${nom}</td><td>${prenom}</td><td>${date}</td><td>${like}</td><td>${remarques}</td><td><button onclick="onModifierClick(${id}); return false;">Modifier</button><button onclick="onSupprimerClick(${id}); return false;">Supprimer</button></td>`);
+                
+                student.splice(id, 1, {
+                    "nom": nom,
+                    "prenom": prenom,
+                    "date": date,
+                    "like": like,
+                    "remarques": remarques});
+                // Replace the "Modifier" button with the "Submit" button
+                $("#addStudentForm button[type='button']").replaceWith(`<button type="submit" class="btn btn-primary form-control">Ajouter</button>`);
+                resetForm();
+            }*/
+        </script>
+    </body>
+</html>
