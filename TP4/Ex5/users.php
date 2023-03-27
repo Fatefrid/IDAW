@@ -16,7 +16,7 @@
                 $request->execute();
                 $resultat = $request->fetchAll(PDO::FETCH_OBJ);
             } else {
-                $request = $pdo->prepare("SELECT * FROM Users");
+                $request = $pdo->prepare("SELECT * FROM Users ORDER BY id ASC");
                 $request->execute();
                 $resultat = $request->fetchAll(PDO::FETCH_OBJ);
             }

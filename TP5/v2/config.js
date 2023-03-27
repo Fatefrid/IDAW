@@ -1,0 +1,1 @@
+const path = `http://localhost/IDAW/TP4/Ex5/users.php/`; 

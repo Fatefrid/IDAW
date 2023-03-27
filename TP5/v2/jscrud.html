@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="style.css"/>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="config.js"></script>
         <title>tabletest</title>
     </head>
     <body>
@@ -49,7 +50,7 @@
 
             function getAllUsers() {
                 $.ajax({
-                    url: "http://localhost/IDAW/TP4/Ex5/users.php",
+                    url: `${path}`,
                     method: "GET",
                     datatype: "json",
                 })
@@ -69,7 +70,7 @@
                     "email" : $("#inputEmail").val()
                 }
                 $.ajax({
-                    url: "http://localhost/IDAW/TP4/Ex5/users.php",
+                    url: `${path}`,
                     method: "POST",
                     datatype: "json",
                     data: JSON.stringify(jsonData),
@@ -94,58 +95,68 @@
                     console.log(users);
                     $("#studentsTableBody").empty();
                     for(var i=0; i<users.length; i++){
-                        $("#studentsTableBody").append(`<tr id=""><td>${users[i].id}</td><td>${users[i].name}</td><td>${users[i].email}</td><td>`);
+                        $("#studentsTableBody").append(`<tr id="${users[i].id}"><td>${users[i].id}</td><td>${users[i].name}</td><td>${users[i].email}</td><td> 
+                            <button onclick="onModifierClick(${users[i].id}); return false;">Modifier</button>
+                            <button onclick="onSupprimerClick(${users[i].id}); return false;">Supprimer</button>
+                        </td></tr>`);
                     }
             }
 
-            /*
+            
             function onSupprimerClick(id) {
-                $("#"+ id).remove();
-                student.splice(id, 1);
+                $.ajax({
+                    url: `${path}${id}`,
+                    method: "DELETE",
+                    datatype: "json",
+                })
+                .done(function(response){
+                    $("#" + id).remove();
+                })
+                .fail(function(error){
+                    alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+                })
             }
 
+            
             function onModifierClick(id) {
                 // Get the current row's values
                 let currentRow = $("#" + id);
-                let nom = currentRow.find("td:eq(0)").text();
-                let prenom = currentRow.find("td:eq(1)").text();
-                let date = currentRow.find("td:eq(2)").text();
-                let like = currentRow.find("td:eq(3)").text() === "Oui";
-                let remarques = currentRow.find("td:eq(4)").text();
-
-                console.log(nom);
+                let name = currentRow.find("td:eq(1)").text();
+                let email = currentRow.find("td:eq(2)").text();
 
                 // Set the values in the form
-                $("#inputNom").val(nom);
-                $("#inputPrenom").val(prenom);
-                $("#inputDate").val(date);
-                $("#inputLike").prop("checked", like);
-                $("#inputRemarques").val(remarques);
+                $("#inputName").val(name);
+                $("#inputEmail").val(email);
 
                 // Replace the "Submit" button with a "Modifier" button
-                $("#addStudentForm button[type='submit']").replaceWith(`<button type="submit" onclick="onUpdateClick(${id});" class="btn btn-primary form-control">Modifier</button>`);
+                $("#addStudentForm button[type='submit']").replaceWith(`<button type="submit" onclick="onUpdateClick(${id}); return false;">Modifier</button>`);
             }
 
             function onUpdateClick(id) {
                 // Update the row's values
-                let nom = $("#inputNom").val();
-                let prenom = $("#inputPrenom").val();
-                let date = $("#inputDate").val();
-                let like = $("#inputLike").prop("checked") ? "Oui" : "Non";
-                let remarques = $("#inputRemarques").val();
-
-                $("#" + id).html(`<td>${nom}</td><td>${prenom}</td><td>${date}</td><td>${like}</td><td>${remarques}</td><td><button onclick="onModifierClick(${id}); return false;">Modifier</button><button onclick="onSupprimerClick(${id}); return false;">Supprimer</button></td>`);
-                
-                student.splice(id, 1, {
-                    "nom": nom,
-                    "prenom": prenom,
-                    "date": date,
-                    "like": like,
-                    "remarques": remarques});
+                event.preventDefault();
+                var jsonData = {
+                    "name" : $("#inputName").val(),
+                    "email" : $("#inputEmail").val()
+                }
+                $.ajax({
+                    url: `${path}${id}`,
+                    method: "PUT",
+                    datatype: "json",
+                    data: JSON.stringify(jsonData),
+                    contentType: "application/json; charset=utf-8",
+                })
+                .done(function(response){
+                    resetForm();
+                    getAllUsers();
+                    
+                })
+                .fail(function(error){
+                    alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+                })
                 // Replace the "Modifier" button with the "Submit" button
-                $("#addStudentForm button[type='button']").replaceWith(`<button type="submit" class="btn btn-primary form-control">Ajouter</button>`);
-                resetForm();
-            }*/
+                $("#addStudentForm button[type='submit']").replaceWith(`<button type="submit">Ajouter</button>`);
+            }
         </script>
     </body>
 </html>
